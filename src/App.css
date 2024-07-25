@@ -1,0 +1,3 @@
+.blue-gradient_text {
+  @apply bg-gradient-to-r from-[#00c6ff] to-[#0072ff] bg-clip-text text-transparent;
+}
