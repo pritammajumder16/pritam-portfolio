@@ -1,10 +1,13 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Shared/Navbar";
 import "./App.css";
 
 function App() {
   return (
-    <div>
-      <span className="text-3xl  font-bold underline">Hello world!</span>
-    </div>
+    <main className="bg-slate-300/20">
+      <Navbar />
+      <Outlet />
+    </main>
   );
 }
 
