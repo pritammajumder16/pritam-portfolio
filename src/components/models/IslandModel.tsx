@@ -19,7 +19,7 @@ type GLTFResult = GLTF & {
     PaletteMaterial001: THREE.MeshStandardMaterial;
   };
 };
-export const Island = ({ ...props }) => {
+export const IslandModel = ({ ...props }) => {
   // https://gltf.pmnd.rs/ converted to tsx from here
   const { nodes, materials } = useGLTF(islandScene) as GLTFResult;
   const islandRef = useRef<Group<Object3DEventMap> | null>(null);
