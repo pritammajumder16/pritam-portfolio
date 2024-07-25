@@ -13,6 +13,7 @@ const Navbar = () => {
       <nav className="flex text-lg gap-7 font-medium">
         {navBarItems.map((navItem) => (
           <NavLink
+            key={navItem.id}
             to={navItem.route}
             className={({ isActive }) =>
               isActive ? "text-blue-500" : "text-black"
