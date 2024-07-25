@@ -1,7 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import { Loader3d } from "../../components/Ui";
-import { Island } from "../../assets/models/Island";
+import { Island } from "../../components/models/Island";
+import { SkyModel } from "../../components/models";
 
 {
   /* <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
@@ -38,6 +39,7 @@ const Home = () => {
             groundColor={"#000000"}
             intensity={1}
           />
+          <SkyModel />
           <Island
             rotation={islandRotation}
             position={islandPosition}

@@ -4,7 +4,7 @@ import { GLTF } from "three-stdlib";
 import { a } from "@react-spring/three";
 import { useRef } from "react";
 import { Group, Object3DEventMap } from "three";
-import { islandScene } from "..";
+import { islandScene } from "../../assets";
 type GLTFResult = GLTF & {
   nodes: {
     polySurface944_tree_body_0: THREE.Mesh;
