@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 import { Loader3d } from "../../components/Ui";
 import {
   BirdModel,
@@ -7,6 +7,7 @@ import {
   PlaneModel,
   SkyModel,
 } from "../../components/models";
+import { Euler, Vector3 } from "three";
 
 {
   /* <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
@@ -14,23 +15,39 @@ import {
       </div> */
 }
 const Home = () => {
-  const adjustIslandForScreenSize = () => {
-    let screenScale: number[];
-    const screenPosition = [0, -6.5, -43];
-    const rotation = [0.1, 4.7, 0];
+  const isRotating = useRef(false);
+  const adjustIslandForScreenSize = (): [Vector3, Vector3, Euler] => {
+    let screenScale: Vector3;
+    const screenPosition: Vector3 = new Vector3(0, -6.5, -43);
+    const rotation: Euler = new Euler(0.1, 4.7, 0);
     if (window.innerWidth < 768) {
-      screenScale = [0.9, 0.9, 0.9];
+      screenScale = new Vector3(0.9, 0.9, 0.9);
     } else {
-      screenScale = [1, 1, 1];
+      screenScale = new Vector3(1, 1, 1);
     }
     return [screenScale, screenPosition, rotation];
   };
+  const adjustPlaneForScreenSize = (): [Vector3, Vector3] => {
+    let screenScale: Vector3;
+    let screenPosition: Vector3;
+    if (window.innerWidth < 768) {
+      screenScale = new Vector3(1.5, 1.5, 1.5);
+      screenPosition = new Vector3(0, -1.5, 0);
+    } else {
+      screenScale = new Vector3(3, 3, 3);
+      screenPosition = new Vector3(0, -4, -4);
+    }
+    return [screenScale, screenPosition];
+  };
+  const [planeScale, planePosition] = adjustPlaneForScreenSize();
   const [islandScale, islandPosition, islandRotation] =
     adjustIslandForScreenSize();
   return (
     <section className="w-full h-screen relative">
       <Canvas
-        className="w-full h-screen bg-transparent"
+        className={`w-full h-screen bg-transparent ${
+          isRotating ? "cursor-grabbing" : "cursor-grab"
+        }`}
         camera={{ near: 0.1, far: 1000 }}
       >
         <Suspense fallback={<Loader3d />}>
@@ -48,9 +65,15 @@ const Home = () => {
             rotation={islandRotation}
             position={islandPosition}
             scale={islandScale}
+            isRotating={isRotating}
           />
           <BirdModel />
-          <PlaneModel />
+          <PlaneModel
+            scale={planeScale}
+            position={planePosition}
+            isRotating={isRotating}
+            rotation={[0, 20, 0]}
+          />
         </Suspense>
       </Canvas>
     </section>
