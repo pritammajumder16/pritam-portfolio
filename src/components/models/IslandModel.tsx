@@ -1,14 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { a } from "@react-spring/three";
-import { useEffect, useRef, useState } from "react";
-import { Group, Object3DEventMap } from "three";
-import { islandScene } from "../../assets";
+import { useCallback, useEffect, useRef } from "react";
 import { GroupProps, useFrame, useThree } from "@react-three/fiber";
+import { islandScene } from "../../assets";
+
 type GLTFResult = GLTF & {
   nodes: {
     polySurface944_tree_body_0: THREE.Mesh;
@@ -23,107 +22,187 @@ type GLTFResult = GLTF & {
     PaletteMaterial001: THREE.MeshStandardMaterial;
   };
 };
+
 type IslandModelProps = GroupProps & {
-  isRotating: React.MutableRefObject<boolean>;
+  isRotating: boolean;
+  currentStage: React.MutableRefObject<number | null>;
+  setIsRotating: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // https://gltf.pmnd.rs/ converted to tsx from here
-export const IslandModel = ({ isRotating, ...props }: IslandModelProps) => {
+export const IslandModel = ({
+  isRotating,
+  currentStage,
+  setIsRotating,
+  ...props
+}: IslandModelProps) => {
   const { nodes, materials } = useGLTF(islandScene) as GLTFResult;
-  const islandRef = useRef<Group<Object3DEventMap> | null>(null);
+  const islandRef = useRef<THREE.Group>(null); // Changed to THREE.Group for better typing
   const { gl, viewport } = useThree();
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
-  const [currentStage, setCurrentStage] = useState<number | null>(null);
-  const handlePointerDown = (e: PointerEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    isRotating.current = true;
-    lastX.current = e.clientX;
-  };
 
-  const handlePointerUp = (e: PointerEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    isRotating.current = false;
-  };
-  const handlePointerMove = (e: PointerEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (isRotating.current == true) {
-      const clientX = e.clientX;
-      const delta = (clientX - lastX.current) / viewport.width;
-      if (islandRef.current) {
-        islandRef.current.rotation.y += delta * 0.01 * Math.PI;
-      }
+  const handlePointerDown = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      e.preventDefault();
+      setIsRotating(true);
+
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       lastX.current = clientX;
-      rotationSpeed.current = delta * 0.01 * Math.PI;
-    }
-  };
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "ArrowLeft") {
-      isRotating.current = true;
-      if (islandRef.current) islandRef.current.rotation.y += 0.01 * Math.PI;
-    } else if (e.key === "ArrowRight") {
-      isRotating.current = true;
-      if (islandRef.current) islandRef.current.rotation.y -= 0.01 * Math.PI;
-    }
-  };
+    },
+    [setIsRotating]
+  );
 
-  const handleKeyUp = (e: KeyboardEvent) => {
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-      isRotating.current = false;
-    }
-  };
+  const handlePointerUp = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      e.preventDefault();
+      setIsRotating(false);
+    },
+    [setIsRotating]
+  );
 
+  const handlePointerMove = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (isRotating) {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const delta = (clientX - lastX.current) / viewport.width;
+        if (islandRef.current) {
+          islandRef.current.rotation.y += delta * 0.01 * Math.PI;
+        }
+        lastX.current = clientX;
+        rotationSpeed.current = delta * 0.01 * Math.PI;
+      }
+    },
+    [isRotating, viewport.width]
+  );
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (e.key === "ArrowLeft") {
+        setIsRotating(true);
+        if (islandRef.current) islandRef.current.rotation.y += 0.01 * Math.PI;
+        rotationSpeed.current = 0.007;
+      } else if (e.key === "ArrowRight") {
+        setIsRotating(true);
+        if (islandRef.current) islandRef.current.rotation.y -= 0.01 * Math.PI;
+        rotationSpeed.current = -0.007;
+      }
+    },
+    [setIsRotating]
+  );
+
+  const handleKeyUp = useCallback(
+    (e: KeyboardEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        setIsRotating(false);
+      }
+    },
+    [setIsRotating]
+  );
+  const handleTouchStart = useCallback((e: any) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsRotating(true);
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    lastX.current = clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      e.preventDefault();
+      setIsRotating(false);
+    },
+    [setIsRotating]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (isRotating) {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const delta = (clientX - lastX.current) / viewport.width;
+        if (islandRef.current)
+          islandRef.current.rotation.y += delta * 0.01 * Math.PI;
+        lastX.current = clientX;
+        rotationSpeed.current = delta * 0.01 * Math.PI;
+      }
+    },
+    [isRotating, viewport.width]
+  );
   useEffect(() => {
     const canvas = gl.domElement;
     canvas.addEventListener("pointerdown", handlePointerDown);
     canvas.addEventListener("pointerup", handlePointerUp);
     canvas.addEventListener("pointermove", handlePointerMove);
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("keyup", handleKeyUp);
+    canvas.addEventListener("touchstart", handleTouchStart);
+    canvas.addEventListener("touchmove", handleTouchMove);
+    canvas.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 
     return () => {
       canvas.removeEventListener("pointerdown", handlePointerDown);
       canvas.removeEventListener("pointerup", handlePointerUp);
       canvas.removeEventListener("pointermove", handlePointerMove);
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("keyup", handleKeyUp);
+      canvas.removeEventListener("touchstart", handleTouchStart);
+      canvas.removeEventListener("touchmove", handleTouchMove);
+      canvas.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [gl]);
+  }, [
+    gl,
+    handleKeyDown,
+    handleKeyUp,
+    handlePointerDown,
+    handlePointerMove,
+    handlePointerUp,
+    handleTouchEnd,
+    handleTouchMove,
+    handleTouchStart,
+  ]);
+
   useFrame(() => {
-    if (isRotating.current == false) {
+    if (!isRotating) {
       rotationSpeed.current *= dampingFactor;
       if (Math.abs(rotationSpeed.current) < 0.001) {
         rotationSpeed.current = 0;
+      }
+      if (islandRef.current) {
+        islandRef.current.rotation.y += rotationSpeed.current;
+      }
+    } else {
+      if (!islandRef.current) {
+        return;
+      }
+      const rotation = islandRef.current.rotation.y;
+      const normalizedRotation =
+        ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+      if (normalizedRotation >= 5.45 && normalizedRotation <= 5.85) {
+        currentStage.current = 4;
+      } else if (normalizedRotation >= 0.85 && normalizedRotation <= 1.3) {
+        currentStage.current = 3;
+      } else if (normalizedRotation >= 2.4 && normalizedRotation <= 2.6) {
+        currentStage.current = 2;
+      } else if (normalizedRotation >= 4.25 && normalizedRotation <= 4.75) {
+        currentStage.current = 1;
       } else {
-        if (!islandRef.current) return;
-        const rotation = islandRef.current.rotation.y;
-        const normalizedRotation =
-          ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-
-        // Set the current stage based on the island's orientation
-        switch (true) {
-          case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
-            setCurrentStage(4);
-            break;
-          case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
-            setCurrentStage(3);
-            break;
-          case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
-            setCurrentStage(2);
-            break;
-          case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
-            setCurrentStage(1);
-            break;
-          default:
-            setCurrentStage(null);
-        }
+        currentStage.current = null;
       }
     }
   });
+
   return (
     <a.group {...props} ref={islandRef}>
       <mesh

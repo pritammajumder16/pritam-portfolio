@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { Suspense, useMemo, useRef, useState } from "react";
 import { Loader3d } from "../../components/Ui";
 import {
   BirdModel,
@@ -15,8 +15,13 @@ import { Euler, Vector3 } from "three";
       </div> */
 }
 const Home = () => {
-  const isRotating = useRef(false);
-  const adjustIslandForScreenSize = (): [Vector3, Vector3, Euler] => {
+  const [isRotating, setIsRotating] = useState<boolean>(false);
+  const currentStage = useRef<number | null>(null);
+  const [islandScale, islandPosition, islandRotation] = useMemo((): [
+    Vector3,
+    Vector3,
+    Euler
+  ] => {
     let screenScale: Vector3;
     const screenPosition: Vector3 = new Vector3(0, -6.5, -43);
     const rotation: Euler = new Euler(0.1, 4.7, 0);
@@ -26,8 +31,8 @@ const Home = () => {
       screenScale = new Vector3(1, 1, 1);
     }
     return [screenScale, screenPosition, rotation];
-  };
-  const adjustPlaneForScreenSize = (): [Vector3, Vector3] => {
+  }, []);
+  const [planeScale, planePosition] = useMemo((): [Vector3, Vector3] => {
     let screenScale: Vector3;
     let screenPosition: Vector3;
     if (window.innerWidth < 768) {
@@ -38,15 +43,12 @@ const Home = () => {
       screenPosition = new Vector3(0, -4, -4);
     }
     return [screenScale, screenPosition];
-  };
-  const [planeScale, planePosition] = adjustPlaneForScreenSize();
-  const [islandScale, islandPosition, islandRotation] =
-    adjustIslandForScreenSize();
+  }, []);
   return (
     <section className="w-full h-screen relative">
       <Canvas
         className={`w-full h-screen bg-transparent ${
-          isRotating ? "cursor-grabbing" : "cursor-grab"
+          isRotating == true ? "cursor-grabbing" : "cursor-grab"
         }`}
         camera={{ near: 0.1, far: 1000 }}
       >
@@ -66,12 +68,14 @@ const Home = () => {
             position={islandPosition}
             scale={islandScale}
             isRotating={isRotating}
+            setIsRotating={setIsRotating}
+            currentStage={currentStage}
           />
           <BirdModel />
           <PlaneModel
             scale={planeScale}
-            position={planePosition}
             isRotating={isRotating}
+            position={planePosition}
             rotation={[0, 20, 0]}
           />
         </Suspense>
