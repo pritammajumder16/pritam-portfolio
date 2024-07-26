@@ -62,7 +62,7 @@ const Home = () => {
             groundColor={"#000000"}
             intensity={1}
           />
-          <SkyModel />
+          <SkyModel isRotating={isRotating} />
           <IslandModel
             rotation={islandRotation}
             position={islandPosition}
