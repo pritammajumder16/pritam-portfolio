@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Loader3d } from "../../components/Ui";
 import {
   BirdModel,
@@ -9,16 +9,32 @@ import {
 } from "../../components/models";
 import { Euler, Vector3 } from "three";
 import { HomeInfo } from "../../components/Shared";
+import { codePhatGayaMp3 } from "../../assets";
+import { SoundOffIcon, SoundOnIcon } from "../../assets/staticImages";
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState<boolean>(false);
   const [currentStage, setCurrentStage] = useState<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(new Audio(codePhatGayaMp3));
+  audioRef.current.volume = 0.4;
+  audioRef.current.loop = true;
+  const [isPlayingMusic, setIsPlayingMusic] = useState<boolean>(false);
+  useEffect(() => {
+    if (isPlayingMusic) {
+      audioRef.current.play();
+    }
+    const musicRef = audioRef;
+    return () => {
+      musicRef.current.pause();
+    };
+  }, [isPlayingMusic]);
   const [islandScale, islandPosition, islandRotation] = useMemo((): [
     Vector3,
     Vector3,
     Euler
   ] => {
     let screenScale: Vector3;
+
     const screenPosition: Vector3 = new Vector3(0, -6.5, -43);
     const rotation: Euler = new Euler(0.1, 4.7, 0);
     if (window.innerWidth < 768) {
@@ -80,6 +96,14 @@ const Home = () => {
           />
         </Suspense>
       </Canvas>
+      <div className="absolute bottom-2 left-2">
+        <img
+          src={!isPlayingMusic ? SoundOffIcon : SoundOnIcon}
+          alt="sound"
+          onClick={() => setIsPlayingMusic(!isPlayingMusic)}
+          className="size-10 cursor-pointer object-contain"
+        />
+      </div>
     </section>
   );
 };

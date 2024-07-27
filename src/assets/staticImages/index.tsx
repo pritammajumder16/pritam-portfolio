@@ -33,3 +33,5 @@ export const GithubLogo = "/icons/github.svg";
 export const InstagramLogo = "/icons/instagram.svg";
 export const LinkedInLogo = "/icons/linkedin.svg";
 export const ContactLogo = "/icons/contact.svg";
+export const SoundOnIcon = "/icons/soundon.png";
+export const SoundOffIcon = "/icons/soundoff.png";
