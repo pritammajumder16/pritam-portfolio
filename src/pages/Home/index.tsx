@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useMemo, useRef, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { Loader3d } from "../../components/Ui";
 import {
   BirdModel,
@@ -8,15 +8,11 @@ import {
   SkyModel,
 } from "../../components/models";
 import { Euler, Vector3 } from "three";
+import { HomeInfo } from "../../components/Shared";
 
-{
-  /* <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-        Pop up
-      </div> */
-}
 const Home = () => {
   const [isRotating, setIsRotating] = useState<boolean>(false);
-  const currentStage = useRef<number | null>(null);
+  const [currentStage, setCurrentStage] = useState<number | null>(null);
   const [islandScale, islandPosition, islandRotation] = useMemo((): [
     Vector3,
     Vector3,
@@ -46,6 +42,9 @@ const Home = () => {
   }, []);
   return (
     <section className="w-full h-screen relative">
+      <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
+        {currentStage && <HomeInfo currentStage={currentStage} />}
+      </div>
       <Canvas
         className={`w-full h-screen bg-transparent ${
           isRotating == true ? "cursor-grabbing" : "cursor-grab"
@@ -70,6 +69,7 @@ const Home = () => {
             isRotating={isRotating}
             setIsRotating={setIsRotating}
             currentStage={currentStage}
+            setCurrentStage={setCurrentStage}
           />
           <BirdModel />
           <PlaneModel

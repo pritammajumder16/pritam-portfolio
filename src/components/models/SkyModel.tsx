@@ -24,7 +24,7 @@ export const SkyModel = ({
     >(null);
   useFrame((_, delta) => {
     if (!isRotating) {
-      if (skyRef.current) skyRef.current.rotation.y += -0.025 * delta;
+      if (skyRef.current) skyRef.current.rotation.y += -0.01 * delta;
     } else {
       if (skyRef.current) skyRef.current.rotation.y += -0.1 * delta;
     }

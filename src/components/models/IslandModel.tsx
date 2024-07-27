@@ -25,19 +25,20 @@ type GLTFResult = GLTF & {
 
 type IslandModelProps = GroupProps & {
   isRotating: boolean;
-  currentStage: React.MutableRefObject<number | null>;
+  currentStage: number | null;
   setIsRotating: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentStage: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 // https://gltf.pmnd.rs/ converted to tsx from here
 export const IslandModel = ({
   isRotating,
-  currentStage,
+  setCurrentStage,
   setIsRotating,
   ...props
 }: IslandModelProps) => {
   const { nodes, materials } = useGLTF(islandScene) as GLTFResult;
-  const islandRef = useRef<THREE.Group>(null); // Changed to THREE.Group for better typing
+  const islandRef = useRef<THREE.Group>(null);
   const { gl, viewport } = useThree();
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
@@ -190,15 +191,15 @@ export const IslandModel = ({
       const normalizedRotation =
         ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
       if (normalizedRotation >= 5.45 && normalizedRotation <= 5.85) {
-        currentStage.current = 4;
+        setCurrentStage(4);
       } else if (normalizedRotation >= 0.85 && normalizedRotation <= 1.3) {
-        currentStage.current = 3;
+        setCurrentStage(3);
       } else if (normalizedRotation >= 2.4 && normalizedRotation <= 2.6) {
-        currentStage.current = 2;
+        setCurrentStage(2);
       } else if (normalizedRotation >= 4.25 && normalizedRotation <= 4.75) {
-        currentStage.current = 1;
+        setCurrentStage(1);
       } else {
-        currentStage.current = null;
+        setCurrentStage(null);
       }
     }
   });

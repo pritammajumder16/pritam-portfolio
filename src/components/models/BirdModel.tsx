@@ -13,7 +13,7 @@ export const BirdModel = () => {
     const action = actions[animationName];
     action?.play();
   }, [actions, names]);
-  useFrame(({ clock, camera }, delta) => {
+  useFrame(({ clock, camera }) => {
     if (!ref.current) {
       return;
     }
