@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useState } from "react";
 import Input from "../../components/Ui/Input";
 import Textarea from "../../components/Ui/Textarea";
 import Button from "../../components/Ui/Button";
@@ -17,27 +16,18 @@ const Contact = () => {
     email: string;
     message: string;
   }>({ name: "", email: "", message: "" });
-  const formRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState<FoxActions>("idle");
-  const { alert, showAlert, hideAlert } = useAlert();
+  const { alert, showAlert } = useAlert();
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleFocus = (
-    _e: React.FocusEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement
-    >
-  ) => {
+  const handleFocus = () => {
     setCurrentAnimation("walk");
   };
-  const handleBlur = (
-    _e: React.FocusEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement
-    >
-  ) => {
+  const handleBlur = () => {
     setCurrentAnimation("idle");
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -65,7 +55,7 @@ const Contact = () => {
         //show success message
         showAlert({ text: "Message sent successfully", type: "success" });
       })
-      .catch((error) => {
+      .catch(() => {
         setCurrentAnimation("idle");
         showAlert({ text: "I didn't receive your message", type: "danger" });
       })
