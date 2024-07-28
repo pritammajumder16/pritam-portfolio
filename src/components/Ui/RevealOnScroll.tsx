@@ -11,7 +11,7 @@ const RevealOnScroll = ({
   const mainControls = useAnimation();
 
   const slideControls = useAnimation();
-  const isInview = useInView(ref);
+  const isInview = useInView(ref, { once: true });
   useEffect(() => {
     if (isInview) {
       mainControls.start("visible");

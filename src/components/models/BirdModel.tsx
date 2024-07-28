@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Group } from "three";
 import { useFrame } from "@react-three/fiber";
 
-export const BirdModel = () => {
+export const BirdModel = ({ ...props }) => {
   const { scene, animations } = useGLTF(birdScene);
   const { ref, actions, names } = useAnimations(animations);
 
@@ -35,6 +35,7 @@ export const BirdModel = () => {
   });
   return (
     <group
+      {...props}
       position={[-5, 2, 1]}
       scale={[0.003, 0.003, 0.003]}
       ref={ref as React.RefObject<Group>}

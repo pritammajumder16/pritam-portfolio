@@ -9,7 +9,7 @@ export const experiences = [
     title: "Associate Software Developer",
     company_name: "Blu Cocoon Digital Pvt Ltd.",
     icon: BcdLogo,
-    iconBg: "#accbe1",
+    iconBg: "#28282b",
     date: "March 2021 - Jan 2022",
     points: [
       "Developed 3 web applications using Angular, Node JS, Cordova, Azure functions and Mongo DB.",
@@ -22,7 +22,7 @@ export const experiences = [
     title: "Senior Developer",
     company_name: "Blu Cocoon Digital Pvt Ltd.",
     icon: BcdLogo,
-    iconBg: "#fbc3bc",
+    iconBg: "#28282b",
     date: "Jan 2022 - Apr 2023",
     points: [
       "Developed and maintained web applications using Angular, Node.js, Azure Graph DB, Azure Functions and MongoDB.",
@@ -35,7 +35,7 @@ export const experiences = [
     title: "Team Lead",
     company_name: "Blu Cocoon Digital Pvt Ltd.",
     icon: BcdLogo,
-    iconBg: "#b7e4c7",
+    iconBg: "#28282b",
     date: "Apr 2023 - Oct 2023",
     points: [
       "Developed and maintained web applications using Angular, Node.js, Azure Graph DB, Azure Functions and MongoDB.",
@@ -60,7 +60,7 @@ export const experiences = [
     title: "Full stack developer",
     company_name: "Plutonapps Pvt. Ltd.",
     icon: PlutonappsLogo,
-    iconBg: "#a2d2ff",
+    iconBg: "#b7e4c7",
     date: "March 2024 - Present",
     points: [
       "Single handedly developed 2 Web applications on React, Tailwind, Node JS (Express) and Digital Ocean",

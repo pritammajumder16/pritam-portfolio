@@ -28,7 +28,7 @@ export const PersonalProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-blue",
+    theme: "btn-back-yellow",
     name: "Prit Foodie",
     tech: [
       "React Native",
@@ -44,7 +44,7 @@ export const PersonalProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-pink",
+    theme: "btn-back-blue",
     name: "Prit Closet",
     tech: ["Angular", "scss", "Mongoose", "NodeJS", "Express", "Javascript"],
     description:
@@ -53,7 +53,7 @@ export const PersonalProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-black",
+    theme: "btn-back-orange",
     name: "Pritam Portfolio",
     tech: ["React", "React Three Fiber", "React Three Drei", "Tailwind"],
     description:
@@ -62,7 +62,7 @@ export const PersonalProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-yellow",
+    theme: "btn-back-red",
     name: "Love you snig",
     tech: ["React", "Tailwind"],
     description: "Built an app to propose my girlfriend with it",

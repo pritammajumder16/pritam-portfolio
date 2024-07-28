@@ -12,7 +12,7 @@ export const companyProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-red",
+    theme: "btn-back-green",
     name: "Tapioca-External",
     companyName: "Blu Cocoon Digital Pvt. Ltd.",
     tech: ["Angular", "Cordova", "Azure Functions", "Azure", "MongoDB"],
@@ -21,7 +21,7 @@ export const companyProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-red",
+    theme: "btn-back-yellow",
     name: "Document management system",
     companyName: "Blu Cocoon Digital Pvt. Ltd.",
     tech: ["Angular", "Node-Red", "Azure VM", "Azure", "MongoDB"],
@@ -30,7 +30,7 @@ export const companyProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-red",
+    theme: "btn-back-blue",
     name: "i360",
     tech: [
       "Angular",
@@ -48,7 +48,7 @@ export const companyProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-red",
+    theme: "btn-back-orange",
     name: "i-Create",
     tech: [
       "Angular",
@@ -76,7 +76,7 @@ export const companyProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-red",
+    theme: "btn-back-green",
     name: "Pitch 40 Microservices",
     tech: ["React", "Tailwind", "Typescript", "Digital Ocean", "Websocket"],
     companyName: "Plutonapps Pvt. Ltd.",
@@ -85,7 +85,7 @@ export const companyProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-red",
+    theme: "btn-back-yellow",
     name: "Pitch 40 Broker",
     tech: ["React", "Tailwind", "Typescript", "Digital Ocean", "Websocket"],
     companyName: "Plutonapps Pvt. Ltd.",
@@ -94,7 +94,7 @@ export const companyProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-red",
+    theme: "btn-back-blue",
     name: "Pitch 40 Backend",
     tech: [
       "NodeJS",
@@ -110,7 +110,7 @@ export const companyProjects = [
   },
   {
     iconUrl: GithubLogo,
-    theme: "btn-back-red",
+    theme: "btn-back-orange",
     name: "Ekko",
     tech: ["Next.js", "Typescript", "Mongoose", "Stripe", "Digital Ocean"],
     companyName: "Plutonapps Pvt. Ltd.",
