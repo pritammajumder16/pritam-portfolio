@@ -16,8 +16,6 @@ export const ThemeContext = createContext<
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<string>("light");
 
-  const darkModeColor = "#15202b";
-  const lightModeColor = "#cbd5e1";
   useEffect(() => {
     const storedTheme = localStorage.getItem("color-theme");
     const prefersDark = window.matchMedia(
@@ -26,10 +24,8 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
     if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
       setTheme("dark");
       document.documentElement.classList.add("dark");
-      document.body.style.backgroundColor = darkModeColor;
     } else {
       setTheme("light");
-      document.body.style.backgroundColor = lightModeColor;
       document.documentElement.classList.remove("dark");
     }
   }, []);
