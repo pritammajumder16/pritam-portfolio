@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { navBarItems } from "../../constants";
 import { Dispatch, SetStateAction } from "react";
 
@@ -9,6 +9,8 @@ export const NavMenu = ({
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <main
       className={
@@ -20,24 +22,27 @@ export const NavMenu = ({
     >
       <section
         className={
-          " w-fit max-w-lg right-0 absolute bg-white h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform  " +
-          (isOpen ? " translate-x-0 " : " translate-x-full ")
+          " w-fit max-w-lg right-0 absolute dark:bg-black-400 bg-gray-100 h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform  " +
+          (isOpen ? " translate-x-2 " : " translate-x-full ")
         }
       >
         <article className="relative w-fit px-4 py-24 pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
           <nav className="flex flex-col  text-lg gap-4 font-medium ">
             {navBarItems.map((navItem) => (
-              <NavLink
+              <span
                 key={navItem.id}
-                to={navItem.route}
-                className={`hover:bg-blue-200 text-center transition px-16 py-3 rounded-lg ${({
-                  isActive,
-                }: {
-                  isActive: boolean;
-                }) => (isActive ? "text-blue-500" : "text-black")}`}
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                  navigate(navItem.route);
+                }}
+                className={`hover:bg-blue-200 text-black-400  dark:hover:!text-black-200 font-bold dark:text-gray-100 text-center transition px-16 py-3 rounded-lg cursor-pointer ${
+                  location.pathname == navItem.route
+                    ? "!text-blue-500 !bg-blue-200 dark:!text-black-200"
+                    : "dark:!text-gray-100"
+                }`}
               >
                 {navItem.text}
-              </NavLink>
+              </span>
             ))}
           </nav>
         </article>

@@ -17,13 +17,13 @@ const Projects = () => {
   }, [themeContext?.theme]);
   return (
     <section className="max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)]">
+      <title>Pritam | Project</title>{" "}
       <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug text-black-400 dark:text-gray-100 font-poppins">
         My&nbsp;
         <span className="blue-gradient_text font-semibold drop-shadow">
           Projects
         </span>
       </span>
-
       <div className="mt-5 flex  flex-col gap-3 text-slate-400 text-justify">
         <span>
           I've embarked on numerous projects throughout the years, but these are

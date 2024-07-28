@@ -14,7 +14,7 @@ const Hamburger = ({
       className={className}
     >
       <g
-        stroke="black"
+        stroke="currentColor"
         strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
