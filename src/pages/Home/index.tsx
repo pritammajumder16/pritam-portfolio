@@ -136,14 +136,14 @@ const Home = () => {
           src={!isPlayingMusic ? SoundOffIcon : SoundOnIcon}
           alt="sound"
           onClick={() => setIsPlayingMusic(!isPlayingMusic)}
-          className="size-10 cursor-pointer object-contain"
+          className="size-12 cursor-pointer object-contain"
         />
       </div>
       <button
         id="theme-toggle"
         type="button"
         onClick={handleThemeToggle}
-        className="text-gray-100  absolute bottom-10 right-2  dark:text-black-400  bg-black-300 dark:bg-gray-100  focus:outline-none   rounded-full  text-sm p-4"
+        className="text-gray-100  absolute bottom-12 right-2  dark:text-black-400  bg-black-300 dark:bg-gray-100  focus:outline-none   rounded-full  text-sm p-4"
       >
         {themeContext?.theme == "dark" ? <Lightmode /> : <DarkMode />}
       </button>
