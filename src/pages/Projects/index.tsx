@@ -3,18 +3,28 @@ import { PersonalProjects } from "../../constants/personalProjects";
 import { ArrowIcon } from "../../assets/staticImages";
 import { CTA } from "../../components/Shared";
 import { companyProjects } from "../../constants/companyProjects";
+import { useContext, useMemo } from "react";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 const Projects = () => {
+  const themeContext = useContext(ThemeContext);
+  const [bgColor, btnBackClass] = useMemo(() => {
+    if (themeContext?.theme == "dark") {
+      return ["#192734", "btn-back-dark"];
+    } else {
+      return ["#fff", "btn-back"];
+    }
+  }, [themeContext?.theme]);
   return (
     <section className="max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)]">
-      <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins">
+      <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug text-black-400 dark:text-gray-100 font-poppins">
         My&nbsp;
         <span className="blue-gradient_text font-semibold drop-shadow">
           Projects
         </span>
       </span>
 
-      <div className="mt-5 flex  flex-col gap-3 text-slate-500 text-justify">
+      <div className="mt-5 flex  flex-col gap-3 text-slate-400 text-justify">
         <span>
           I've embarked on numerous projects throughout the years, but these are
           the ones I hold closest to my heart. If you come across something that
@@ -24,14 +34,16 @@ const Projects = () => {
         </span>
       </div>
       <div className="mt-20  flex flex-col">
-        <span className="font-semibold sm:text-3xl text-xl relative font-poppins blue-gradient_text  drop-shadow">
+        <span className="font-semibold sm:text-3xl text-xl relative font-poppins text-black-400 dark:text-gray-100  drop-shadow">
           Personal Projects
         </span>
         <div className="flex flex-wrap my-20 gap-16">
           {PersonalProjects.map((project) => (
             <div className="md:w-[400px] w-full" key={project.name}>
               <div className="block-container size-12">
-                <div className={`btn-back rounded-xl ${project.theme}`} />
+                <div
+                  className={`${btnBackClass} rounded-xl ${project.theme}`}
+                />
                 <div className="btn-front rounded-xl flex justify-center items-center">
                   <img
                     src={project.iconUrl}
@@ -41,10 +53,10 @@ const Projects = () => {
                 </div>
               </div>
               <div className="mt-5 flex flex-col">
-                <span className="text-2xl font-poppins font-semibold">
+                <span className="text-2xl text-black-400 dark:text-gray-100 font-poppins font-semibold">
                   {project.name}
                 </span>
-                <span className="mt-2 text-slate-500 text-justify">
+                <span className="mt-2 text-slate-400 text-justify">
                   {project.description}
                 </span>
                 <div className="mt-5 flex items-center gap-2 font-poppins">
@@ -62,6 +74,12 @@ const Projects = () => {
                     />
                   </Link>
                 </div>
+                <span className="mt-4 text-slate-400">
+                  <span className="font-semibold  text-black-400 dark:text-gray-100  ">
+                    Tech used-&nbsp;{" "}
+                  </span>{" "}
+                  {project.tech.join(", ")}
+                </span>
               </div>
             </div>
           ))}
@@ -76,7 +94,9 @@ const Projects = () => {
           {companyProjects.map((project) => (
             <div className="lg:w-[400px] w-full" key={project.name}>
               <div className="block-container size-12">
-                <div className={`btn-back rounded-xl ${project.theme}`} />
+                <div
+                  className={`${btnBackClass} rounded-xl ${project.theme}`}
+                />
                 <div className="btn-front rounded-xl flex justify-center items-center">
                   <img
                     src={project.iconUrl}
@@ -86,14 +106,16 @@ const Projects = () => {
                 </div>
               </div>
               <div className="mt-5 flex flex-col">
-                <span className="text-2xl font-poppins font-semibold">
+                <span className="text-2xl text-black-400 dark:text-gray-100 font-poppins font-semibold">
                   {project.name}
                 </span>
-                <span className="mt-2 text-slate-500 text-justify">
+                <span className="mt-2 text-slate-400 text-justify">
                   {project.description}
                 </span>
-                <span className="mt-2 text-slate-500 text-justify">
-                  <span className="">Tech used:&nbsp; </span>{" "}
+                <span className="mt-4 text-slate-400">
+                  <span className="font-semibold text-black-400 dark:text-gray-100">
+                    Tech used-&nbsp;{" "}
+                  </span>{" "}
                   {project.tech.join(", ")}
                 </span>
               </div>
