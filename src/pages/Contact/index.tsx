@@ -67,10 +67,13 @@ const Contact = () => {
     <section className="relative flex lg:flex-row flex-col max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)]">
       {alert.show && <Alert {...alert} />}
       <div className="flex-1 min-w-[50%] flex flex-col">
-        <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins">
+        <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins text-black-400 dark:text-gray-100">
           Get in touch
         </span>
-        <form action="w-full flex flex-col gap-7 mt-14" onSubmit={handleSubmit}>
+        <form
+          className="w-full flex flex-col gap-7  mt-10"
+          onSubmit={handleSubmit}
+        >
           <Input
             type="text"
             name="name"
@@ -96,6 +99,7 @@ const Contact = () => {
           <Textarea
             name="message"
             placeholder="Let me know how I can help you!"
+            label="Message"
             required
             value={form.message}
             onChange={handleChange}

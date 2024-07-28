@@ -5,11 +5,14 @@ interface InputProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 const Textarea = ({ label, labelClassNames, ...props }: InputProps) => {
   return (
-    <label className={`text-black-500 font-semibold ${labelClassNames}`}>
+    <label
+      className={`text-black-400 dark:text-gray-100 font-semibold ${labelClassNames}`}
+    >
       {label}
       <textarea
         {...props}
-        className=" block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 mt-2.5 font-normal shadow-card"
+        className=" bg-white border border-gray-200 dark:bg-black-200 focus:outline-none dark:text-gray-300 dark:border-black-300 text-black-400
+         block p-2.5 w-full text-sm   rounded-lg   font-normal shadow-card"
       />
     </label>
   );

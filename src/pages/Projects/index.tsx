@@ -8,7 +8,7 @@ import { ThemeContext } from "../../Context/ThemeContext";
 
 const Projects = () => {
   const themeContext = useContext(ThemeContext);
-  const [bgColor, btnBackClass] = useMemo(() => {
+  const [, btnBackClass] = useMemo(() => {
     if (themeContext?.theme == "dark") {
       return ["#192734", "btn-back-dark"];
     } else {
