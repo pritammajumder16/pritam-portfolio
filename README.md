@@ -1,30 +1,69 @@
-# React + TypeScript + Vite
+# Pritam Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Pritam Portfolio project! This is a modern, 3d, interactive portfolio website showcasing my work.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To get started with this project locally, follow these steps:
 
-## Expanding the ESLint configuration
+1. **Clone the Repository**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+   ```bash
+   git clone https://github.com/yourusername/pritam-portfolio.git
+   cd pritam-portfolio
+   ```
 
-- Configure the top-level `parserOptions` property like this:
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+   or
+   ```bash
+   yarn install
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Setup Environments
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Check the .env.example file
+
+### Usage
+
+1. **Start the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and navigate to `http://localhost:3000` to see the application in action.
+
+## 📜 Scripts
+
+- `npm run dev`: Starts the development server on port 3000.
+- `npm run build`: Builds the project for production.
+- `npm run preview`: Previews the production build.
+- `npm run lint`: Lints the codebase with ESLint.
+
+## 🛠️ Technologies Used
+
+- **Frontend**: React, TypeScript
+- **Styling**: Tailwind CSS
+- **3D Models**: React three fiber, React three drei, three.js
+- **Animations**: Framer motion
+- **Servies**: EmailJS (for sending emails)
+
+## 🌐 Deployment
+
+The project is deployed and can be accessed at:
+
+[https://pritam-majumder.vercel.app/](https://pritam-majumder.vercel.app/)
+
+## 📧 Contact
+
+For any questions or feedback, please reach out to:
+
+- **Email**: [pritammajumder416@gmail.com](mailto:pritammajumder416@gmail.com)
+- **GitHub**: [github.com/pritammajumder16](https://github.com/pritammajumder16)
+
+## 📜 License
+
+This project is licensed under the MIT License.
