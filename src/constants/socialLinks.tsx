@@ -1,16 +1,10 @@
 import {
-  ContactLogo,
   GithubLogo,
   LinkedInLogo,
   InstagramLogo,
 } from "../assets/staticImages";
 
 export const socialLinks = [
-  {
-    name: "Contact",
-    iconUrl: ContactLogo,
-    link: "/contact",
-  },
   {
     name: "GitHub",
     iconUrl: GithubLogo,

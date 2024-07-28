@@ -8,6 +8,7 @@ import { experiences } from "../../constants/experiences";
 import { CTA } from "../../components/Shared";
 import { useContext, useMemo } from "react";
 import { ThemeContext } from "../../Context/ThemeContext";
+import RevealOnScroll from "../../components/Ui/RevealOnScroll";
 
 const About = () => {
   const themeContext = useContext(ThemeContext);
@@ -21,50 +22,64 @@ const About = () => {
   console.log(bgColor, themeContext?.theme);
   return (
     <section className="max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)]">
-      <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins dark:text-gray-100">
-        Hello, I'm&nbsp;
-        <span className="blue-gradient_text font-semibold drop-shadow">
-          Pritam
+      <RevealOnScroll>
+        <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins dark:text-gray-100">
+          Hello, I'm&nbsp;
+          <span className="blue-gradient_text font-semibold drop-shadow">
+            Pritam
+          </span>
         </span>
-      </span>
-      <div className="mt-5 flex  sm:text-base text-sm text-justify flex-col gap-3 text-slate-400 ">
-        <span>
-          Full stack developer, specializing in technical education through
-          hands-on learning and building applications.
-        </span>
-      </div>
-      <div className="py-10 flex flex-col">
-        <span className="font-semibold sm:text-3xl text-xl relative font-poppins dark:text-gray-100">
-          My skills
-        </span>
-        <div className="mt-16 flex flex-wrap gap-12 items-center justify-center">
-          {skills.map((skill) => (
-            <div className="block-container size-20" key={skill.name}>
-              <div className={`${btnBackClass} rounded-xl`}></div>
-              <div className="btn-front rounded-xl flex flex-col gap-2 justify-center items-center">
-                <img
-                  src={skill.imageUrl}
-                  alt={skill.name}
-                  className="size-1/2 object-contain"
-                />
-                <span className="text-xs text-center dark:text-gray-100">
-                  {skill.name}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="py-16">
-        <span className="font-semibold sm:text-3xl text-xl relative font-poppins dark:text-gray-100">
-          Work experience
-        </span>
-        <div className="mt-5 flex  flex-col gap-3 text-slate-400 ">
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <div className="mt-5 flex  sm:text-base text-sm text-justify flex-col gap-3 text-slate-500 dark:text-slate-400 ">
           <span>
-            I've worked with all sorts of companies, leveling up my skills and
-            teaming up with smart people. Here's the rundown:
+            Full stack developer, specializing in technical education through
+            hands-on learning and building applications.
           </span>
         </div>
+      </RevealOnScroll>
+      <div className="py-10 flex flex-col">
+        <RevealOnScroll>
+          <span className="font-semibold sm:text-3xl text-xl relative font-poppins dark:text-gray-100">
+            My skills
+          </span>
+        </RevealOnScroll>
+        <RevealOnScroll className="w-full">
+          <div className="mt-16 flex flex-wrap gap-12 items-center justify-center">
+            {skills.map((skill) => (
+              <div className="block-container size-20" key={skill.name}>
+                <div className={`${btnBackClass} rounded-xl`}></div>
+                <div className="btn-front rounded-xl flex flex-col gap-2 justify-center items-center">
+                  <img
+                    src={skill.imageUrl}
+                    alt={skill.name}
+                    className="size-1/2 object-contain"
+                  />
+                  <span className="text-xs text-center dark:text-gray-100">
+                    {skill.name}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </RevealOnScroll>
+      </div>
+      <div className="py-16">
+        <RevealOnScroll>
+          <span className="font-semibold sm:text-3xl text-xl relative font-poppins dark:text-gray-100">
+            Work experience
+          </span>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <div className="mt-5 flex  flex-col gap-3 text-slate-500 dark:text-slate-400 ">
+            <span>
+              I've worked with all sorts of companies, leveling up my skills and
+              teaming up with smart people. Here's the rundown:
+            </span>
+          </div>
+        </RevealOnScroll>
+
         <div className="mt-12 flex">
           <VerticalTimeline>
             {experiences.map((experience) => (
@@ -104,7 +119,7 @@ const About = () => {
                     {experience.points.map((point, index) => (
                       <li
                         key={index}
-                        className="text-black-500/50 dark:text-slate-400 font-normal pl-1 text-sm"
+                        className="text-black-500/50 dark:text-slate-500 dark:text-slate-400 font-normal pl-1 text-sm"
                       >
                         {point}
                       </li>
@@ -116,8 +131,12 @@ const About = () => {
           </VerticalTimeline>
         </div>
       </div>
-      <hr className="border-slate-200 dark:border-slate-500" />
-      <CTA />
+      <RevealOnScroll>
+        <hr className="border-slate-200 dark:border-slate-500" />
+      </RevealOnScroll>
+      <RevealOnScroll className="w-full">
+        <CTA />
+      </RevealOnScroll>
     </section>
   );
 };

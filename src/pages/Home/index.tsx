@@ -131,7 +131,7 @@ const Home = () => {
           />
         </Suspense>
       </Canvas>
-      <div className="absolute bottom-10 left-2">
+      <div className="absolute bottom-14 left-2">
         <img
           src={!isPlayingMusic ? SoundOffIcon : SoundOnIcon}
           alt="sound"
@@ -143,7 +143,7 @@ const Home = () => {
         id="theme-toggle"
         type="button"
         onClick={handleThemeToggle}
-        className="text-gray-100  absolute bottom-12 right-2  dark:text-black-400  bg-black-300 dark:bg-gray-100  focus:outline-none   rounded-full  text-sm p-4"
+        className="text-gray-100  absolute bottom-14 right-2  dark:text-black-400  bg-black-300 dark:bg-gray-100  focus:outline-none   rounded-full  text-sm p-4"
       >
         {themeContext?.theme == "dark" ? <Lightmode /> : <DarkMode />}
       </button>

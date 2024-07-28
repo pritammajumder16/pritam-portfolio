@@ -10,6 +10,8 @@ import { FoxModel } from "../../components/models";
 import { FoxActions } from "../../types/types";
 import useAlert from "../../hooks/useAlert";
 import Alert from "../../components/Shared/Alert";
+import RevealOnScroll from "../../components/Ui/RevealOnScroll";
+import Socials from "../../components/Shared/Socials";
 const Contact = () => {
   const [form, setForm] = useState<{
     name: string;
@@ -64,72 +66,92 @@ const Contact = () => {
       });
   };
   return (
-    <section className="relative flex lg:flex-row flex-col max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)]">
-      {alert.show && <Alert {...alert} />}
-      <div className="flex-1 min-w-[50%] flex flex-col">
-        <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins text-black-400 dark:text-gray-100">
-          Get in touch
-        </span>
-        <form
-          className="w-full flex flex-col gap-7  mt-10"
-          onSubmit={handleSubmit}
-        >
-          <Input
-            type="text"
-            name="name"
-            placeholder="Enter name"
-            required
-            label="Name"
-            value={form.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          <Input
-            type="email"
-            name="email"
-            label="Email"
-            placeholder="Enter email"
-            required
-            value={form.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          <Textarea
-            name="message"
-            placeholder="Let me know how I can help you!"
-            label="Message"
-            required
-            value={form.message}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          <Button
-            type="submit"
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            disabled={isLoading}
+    <section>
+      <section className="relative flex lg:flex-row flex-col max-w-5xl mx-auto sm:px-16 sm:pt-16  !pt-[126px] px-8 min-h-[calc(100vh-80px)]">
+        {alert.show && <Alert {...alert} />}
+        <div className="flex-1 min-w-[50%] flex flex-col">
+          <RevealOnScroll>
+            <span className="sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins text-black-400 dark:text-gray-100">
+              Get in touch
+            </span>
+          </RevealOnScroll>
+          <form
+            className="w-full flex flex-col gap-7  mt-10"
+            onSubmit={handleSubmit}
           >
-            {isLoading ? "Sending..." : "Send message"}
-          </Button>
-        </form>
-      </div>
-      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75, near: 0.1, far: 1000 }}>
-          <Suspense fallback={<Loader3d />}>
-            <directionalLight intensity={2.5} position={[0, 0, 1]} />
-            <ambientLight intensity={0.5} />
-            <FoxModel
-              currentAnimation={currentAnimation}
-              position={[0.5, 0.35, 0]}
-              rotation={[12.625, -0.6, 0]}
-              scale={[0.5, 0.5, 0.5]}
-            />
-          </Suspense>
-        </Canvas>
-      </div>
+            {" "}
+            <RevealOnScroll className="w-full">
+              <Input
+                type="text"
+                name="name"
+                placeholder="Enter name"
+                required
+                label="Name"
+                value={form.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onFocus={handleFocus}
+              />
+            </RevealOnScroll>
+            <RevealOnScroll className="w-full">
+              <Input
+                type="email"
+                name="email"
+                label="Email"
+                placeholder="Enter email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onFocus={handleFocus}
+              />
+            </RevealOnScroll>
+            <RevealOnScroll className="w-full">
+              <Textarea
+                name="message"
+                placeholder="Let me know how I can help you!"
+                label="Message"
+                required
+                value={form.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onFocus={handleFocus}
+              />
+            </RevealOnScroll>
+            <RevealOnScroll className="w-full">
+              <Button
+                type="submit"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                disabled={isLoading}
+              >
+                {isLoading ? "Sending..." : "Send message"}
+              </Button>
+            </RevealOnScroll>
+          </form>
+        </div>
+
+        <div className="lg:w-1/2 w-full lg:h-auto md:h-[450px] h-[300px]">
+          <Canvas
+            camera={{ position: [0, 0, 5], fov: 75, near: 0.1, far: 1000 }}
+          >
+            <Suspense fallback={<Loader3d />}>
+              <directionalLight intensity={2.5} position={[0, 0, 1]} />
+              <ambientLight intensity={0.5} />
+              <FoxModel
+                currentAnimation={currentAnimation}
+                position={[0.5, 0.35, 0]}
+                rotation={[12.625, -0.6, 0]}
+                scale={[0.5, 0.5, 0.5]}
+              />
+            </Suspense>
+          </Canvas>
+        </div>
+      </section>
+
+      <RevealOnScroll>
+        <Socials />
+      </RevealOnScroll>
     </section>
   );
 };
