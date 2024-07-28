@@ -13,9 +13,9 @@ const Navbar = () => {
       >
         <p className="blue-gradient_text">PM</p>
       </NavLink>
-      <div className="mr-4 mt-1 z-20 hamburgerDiv ">
+      <div className=" mt-1 z-20 hamburgerDiv rounded-lg flex items-center justify-center  dark:bg-black-400 bg-gray-100  ">
         <Hamburger
-          className={`cursor-pointer text-blue-500 ${
+          className={` scale-75 cursor-pointer text-blue-500 ${
             isOpen ? "opened" : "closed transition"
           }`}
           onClick={() => setIsOpen(!isOpen)}

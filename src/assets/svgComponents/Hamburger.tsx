@@ -8,10 +8,11 @@ const Hamburger = ({
   return (
     <svg
       id="hamburger"
-      height={"45px"}
-      width={"45px"}
+      height={"36px"}
+      width={"36px"}
+      viewBox="0 0 60 40"
       onClick={onClick}
-      className={className}
+      className={`${className}`}
     >
       <g
         stroke="currentColor"
