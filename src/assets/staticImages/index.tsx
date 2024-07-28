@@ -35,3 +35,4 @@ export const LinkedInLogo = "/icons/linkedin.svg";
 export const ContactLogo = "/icons/contact.svg";
 export const SoundOnIcon = "/icons/soundon.png";
 export const SoundOffIcon = "/icons/soundoff.png";
+export const HamburgerIcon = "/icons/hamburger.svg";

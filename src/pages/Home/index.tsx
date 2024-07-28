@@ -1,5 +1,12 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Suspense,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Loader3d } from "../../components/Ui";
 import {
   BirdModel,
@@ -11,6 +18,8 @@ import { Euler, Vector3 } from "three";
 import { HomeInfo } from "../../components/Shared";
 import { codePhatGayaMp3 } from "../../assets";
 import { SoundOffIcon, SoundOnIcon } from "../../assets/staticImages";
+import { ThemeContext } from "../../Context/ThemeContext";
+import { Lightmode, DarkMode } from "../../assets/svgComponents";
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState<boolean>(false);
@@ -56,8 +65,34 @@ const Home = () => {
     }
     return [screenScale, screenPosition];
   }, []);
+  const themeContext = useContext(ThemeContext);
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("color-theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
+      themeContext?.setTheme("dark");
+      document.documentElement.classList.add("dark");
+    } else {
+      themeContext?.setTheme("light");
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const handleThemeToggle = () => {
+    if (themeContext?.theme === "dark") {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("color-theme", "light");
+      themeContext?.setTheme("light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("color-theme", "dark");
+      themeContext?.setTheme("dark");
+    }
+  };
   return (
-    <section className="w-full h-screen relative">
+    <section className="w-full overflow-y-hidden h-screen relative">
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <HomeInfo currentStage={currentStage} />}
       </div>
@@ -104,6 +139,14 @@ const Home = () => {
           className="size-10 cursor-pointer object-contain"
         />
       </div>
+      <button
+        id="theme-toggle"
+        type="button"
+        onClick={handleThemeToggle}
+        className="text-gray-200  absolute bottom-2 right-2  dark:text-gray-200   focus:outline-none   rounded-full bg-blue-500 text-sm p-2.5"
+      >
+        {themeContext?.theme == "dark" ? <Lightmode /> : <DarkMode />}
+      </button>
     </section>
   );
 };

@@ -14,4 +14,9 @@ export const navBarItems = [
     route: "/projects",
     text: "Projects",
   },
+  {
+    id: 4,
+    route: "/contact",
+    text: "Contact",
+  },
 ];

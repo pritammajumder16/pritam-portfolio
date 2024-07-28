@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const CTA = () => {
+export const CTA = () => {
   return (
     <section className="w-full flex items-center md:flex-row flex-col sm:mt-16 mt-8 gap-7">
-      <span className="text-black-500  flex-1 font-extrabold text-3xl  max-md:text-center">
+      <span className="text-black-400  flex-1 font-extrabold text-3xl  max-md:text-center dark:text-gray-100">
         Have a project in mind? <br className="sm:block hidden" />
       </span>
       <Link
@@ -15,5 +15,3 @@ const CTA = () => {
     </section>
   );
 };
-
-export default CTA;
